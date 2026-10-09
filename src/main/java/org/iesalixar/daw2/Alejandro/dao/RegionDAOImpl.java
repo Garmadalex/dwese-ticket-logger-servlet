@@ -31,8 +31,7 @@ public class RegionDAOImpl implements RegionDAO {
     public void insertRegion(Region region) throws SQLException {
         String query = "INSERT INTO regions (code, name) VALUES (?, ?)";
         try (Connection connection = DatabaseConnectionManager.getConnection();
-             PreparedStatement preparedStatement =
-                     connection.prepareStatement(query)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, region.getCode());
             preparedStatement.setString(2, region.getName());
             preparedStatement.executeUpdate();
@@ -46,8 +45,7 @@ public class RegionDAOImpl implements RegionDAO {
     public void updateRegion(Region region) throws SQLException {
         String query = "UPDATE regions SET code = ?, name = ? WHERE id = ?";
         try (Connection connection = DatabaseConnectionManager.getConnection();
-             PreparedStatement preparedStatement =
-                     connection.prepareStatement(query)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, region.getCode());
             preparedStatement.setString(2, region.getName());
             preparedStatement.setInt(3, region.getId());
@@ -128,8 +126,7 @@ public class RegionDAOImpl implements RegionDAO {
      * @throws SQLException si ocurre un error en la consulta SQL.
      */
     @Override
-    public boolean existsRegionByCodeAndNotId(String code, int id) throws
-            SQLException {
+    public boolean existsRegionByCodeAndNotId(String code, int id) throws SQLException {
         String sql = "SELECT COUNT(*) FROM regions WHERE UPPER(code) = ? AND id  != ?";
         try (Connection connection = DatabaseConnectionManager.getConnection())
         {

@@ -37,9 +37,7 @@ public class RegionServlet extends HttpServlet {
      * @throws IOException en caso de errores de E/S.
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse
-            response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         response.setContentType("text/html;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -108,8 +106,7 @@ public class RegionServlet extends HttpServlet {
             throws SQLException, IOException, ServletException {
         List<Region> listRegions = regionDAO.listAllRegions(); // Obtener todas las regiones desde el DAO
         request.setAttribute("listRegions", listRegions); // Pasar la lista de regiones a la vista
-        request.getRequestDispatcher("region.jsp").forward(request, response);
-// Redirigir a la página JSP
+        request.getRequestDispatcher("region.jsp").forward(request, response);   // Redirigir a la página JSP
     }
     /**
      * Muestra el formulario para crear una nueva región.
@@ -118,9 +115,7 @@ public class RegionServlet extends HttpServlet {
      * @throws ServletException en caso de error en el servlet.
      * @throws IOException en caso de error de E/S.
      */
-    private void showNewForm(HttpServletRequest request, HttpServletResponse
-            response)
-            throws ServletException, IOException {
+    private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("region-form.jsp").forward(request,
                 response); // Redirige a la vista para nueva región
     }
@@ -132,9 +127,7 @@ public class RegionServlet extends HttpServlet {
      * @throws ServletException en caso de error en el servlet.
      * @throws IOException en caso de error de E/S.
      */
-    private void showEditForm(HttpServletRequest request, HttpServletResponse
-            response)
-            throws SQLException, ServletException, IOException {
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Region existingRegion = regionDAO.getRegionById(id); // Obtener región por ID desde el DAO
         request.setAttribute("region", existingRegion); // Pasar la región a la vista
@@ -170,8 +163,7 @@ public class RegionServlet extends HttpServlet {
         // Validar si el código ya existe ignorando mayúsculas
         if (regionDAO.existsRegionByCode(code)) {
             request.setAttribute("errorMessage", "El código de la región ya  existe.");
-                    request.getRequestDispatcher("region-form.jsp").forward(request,
-                            response);
+                    request.getRequestDispatcher("region-form.jsp").forward(request, response);
             return;
         }
         Region newRegion = new Region(code, name);
