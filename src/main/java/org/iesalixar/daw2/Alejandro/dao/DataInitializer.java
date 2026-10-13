@@ -13,10 +13,8 @@ import org.iesalixar.daw2.Alejandro.dao.DatabaseConnectionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 public class DataInitializer {
-    private static final Logger logger =
-            LoggerFactory.getLogger(DataInitializer.class);
-    public static void loadDataFromSQL(InputStream sqlFileStream) throws
-            SQLException, IOException {
+    private static final Logger logger = LoggerFactory.getLogger(DataInitializer.class);
+    public static void loadDataFromSQL(InputStream sqlFileStream) throws SQLException, IOException {
         logger.info("Entrando en el método loadDataFromSQL");
         if (sqlFileStream == null) {
             logger.error("El archivo SQL no se ha proporcionado o es nulo");
@@ -26,8 +24,7 @@ public class DataInitializer {
             logger.info("Conexión a la base de datos establecida");
             // Leer el archivo y dividir las sentencias por ';'
             String sql;
-            try (BufferedReader reader = new BufferedReader(new
-                    InputStreamReader(sqlFileStream))) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(sqlFileStream))) {
                 sql = reader.lines().collect(Collectors.joining("\n"));
             } catch (IOException e) {
                 logger.error("Error al leer el archivo SQL: {}", e.getMessage(),
@@ -41,8 +38,7 @@ public class DataInitializer {
                 // Ejecutar cada instrucción SQL por separado
                 for (String sqlStatement : statements) {
                     if (!sqlStatement.trim().isEmpty()) {
-                        logger.info("Ejecutando la sentencia SQL: {}",
-                                sqlStatement);
+                        logger.info("Ejecutando la sentencia SQL: {}", sqlStatement);
                         statement.execute(sqlStatement.trim());
                     }
                 }

@@ -16,16 +16,14 @@ import java.io.InputStream;
 @WebListener
 public class AppContextListener implements ServletContextListener {
     // Logger para trazar eventos usando SLF4J
-    private static final Logger logger =
-            LoggerFactory.getLogger(AppContextListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(AppContextListener.class);
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         logger.info("Inicializando la aplicación y conectando a la base de datos...");
         // Iniciamos la conexión a la base de datos al arrancar la aplicación
         try (Connection connection = DatabaseConnectionManager.getConnection()) {
             // Obtener el archivo data.sql desde el classpath
-            InputStream sqlFileStream =
-                    sce.getServletContext().getResourceAsStream("/WEB-INF/classes/data.sql");
+            InputStream sqlFileStream =  sce.getServletContext().getResourceAsStream("/WEB-INF/classes/data.sql");
             if (sqlFileStream == null) {
                 logger.error("No se pudo encontrar el archivo data.sql en /WEBINF/classes/");
                 return;
