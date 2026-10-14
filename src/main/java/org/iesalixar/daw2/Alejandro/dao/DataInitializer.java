@@ -27,8 +27,7 @@ public class DataInitializer {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(sqlFileStream))) {
                 sql = reader.lines().collect(Collectors.joining("\n"));
             } catch (IOException e) {
-                logger.error("Error al leer el archivo SQL: {}", e.getMessage(),
-                        e);
+                logger.error("Error al leer el archivo SQL: {}", e.getMessage(), e);
                 throw new IOException("Error al leer el archivo SQL", e);
             }
             String[] statements = sql.split(";"); // Dividir las sentencias por';'

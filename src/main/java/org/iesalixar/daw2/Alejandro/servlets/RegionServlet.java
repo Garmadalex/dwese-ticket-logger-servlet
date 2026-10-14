@@ -70,8 +70,7 @@ public class RegionServlet extends HttpServlet {
      * @throws IOException en caso de errores de E/S.
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse
-            response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
         try {
@@ -101,8 +100,7 @@ public class RegionServlet extends HttpServlet {
      * @throws IOException en caso de error de E/S.
      * @throws ServletException en caso de error en el servlet.
      */
-    private void listRegions(HttpServletRequest request, HttpServletResponse
-            response)
+    private void listRegions(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         List<Region> listRegions = regionDAO.listAllRegions(); // Obtener todas las regiones desde el DAO
         request.setAttribute("listRegions", listRegions); // Pasar la lista de regiones a la vista
@@ -148,8 +146,7 @@ public class RegionServlet extends HttpServlet {
      * @throws ServletException si ocurre un error en el procesamiento del
     servlet.
      */
-    private void insertRegion(HttpServletRequest request, HttpServletResponse
-            response)
+    private void insertRegion(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         String code = request.getParameter("code").trim().toUpperCase(); // Convertir a mayúsculas
         String name = request.getParameter("name").trim();

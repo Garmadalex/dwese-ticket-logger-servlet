@@ -5,9 +5,9 @@ import org.iesalixar.daw2.Alejandro.entity.Provincia;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Interfaz ProvinceDAO que define los métodos de acceso a datos para la entidad Province.
- */
+
+ //La interfaz ProvinciaDAO define los métodos de acceso a datos para la entidad Provincia.
+
 public interface ProvinciaDAO {
 
     List<Provincia> listAllProvinces() throws SQLException;

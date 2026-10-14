@@ -4,32 +4,28 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * Clase Province que representa una entidad para modelar una provincia
- * asociada a una Comunidad Autónoma (Region) en la base de datos.
- */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Provincia {
 
-    /** Identificador único de la provincia. */
     private int id;
 
-    /** Código único de la provincia. */
     private String code;
 
-    /** Nombre de la provincia. */
     private String name;
 
-    /** Identificador de la región (Comunidad Autónoma) a la que pertenece. */
     private int idRegion;
 
-    /** Objeto Region asociado para mostrar su información detallada. */
     private Region region;
 
     /**
-     * Constructor personalizado sin ID, útil para inserciones previas a la generación de la clave primaria.
+     *  Este es un constructor personalizado que no incluye el campo `id`.
+     *              * Se utiliza para crear instancias de `Provincia` cuando no es necesario o no
+     *              se conoce el `id` de la provincia
+     *              * (por ejemplo, antes de insertar la región en la base de datos, donde el
+     *              `id` es autogenerado).
      *
      * @param code     Código de la provincia.
      * @param name     Nombre de la provincia.

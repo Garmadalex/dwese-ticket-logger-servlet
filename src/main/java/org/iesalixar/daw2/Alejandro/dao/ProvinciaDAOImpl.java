@@ -10,9 +10,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Implementación de la interfaz ProvinceDAO para gestionar las operaciones SQL de provincias.
- */
+
+ // Implementación de la interfaz ProvinceDAO para gestionar las operaciones SQL de provincias.
+
 public class ProvinciaDAOImpl implements ProvinciaDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(ProvinciaDAOImpl.class);
@@ -21,8 +21,7 @@ public class ProvinciaDAOImpl implements ProvinciaDAO {
     public List<Provincia> listAllProvinces() throws SQLException {
         logger.info("Entrando en el método listAllProvinces");
         List<Provincia> provinces = new ArrayList<>();
-        String query = "SELECT p.id, p.code, p.name, p.id_region, r.code AS r_code, r.name AS r_name " +
-                "FROM provinces p JOIN regions r ON p.id_region = r.id";
+        String query = "SELECT p.id, p.code, p.name, p.id_region, r.code AS r_code, r.name AS r_name FROM provinces p JOIN regions r ON p.id_region = r.id";
 
         try (Connection connection = DatabaseConnectionManager.getConnection();
              Statement statement = connection.createStatement();
@@ -108,8 +107,7 @@ public class ProvinciaDAOImpl implements ProvinciaDAO {
     @Override
     public Provincia getProvinceById(int id) throws SQLException {
         logger.info("Entrando en getProvinceById con ID: {}", id);
-        String query = "SELECT p.id, p.code, p.name, p.id_region, r.code AS r_code, r.name AS r_name " +
-                "FROM provinces p JOIN regions r ON p.id_region = r.id WHERE p.id = ?";
+        String query = "SELECT p.id, p.code, p.name, p.id_region, r.code AS r_code, r.name AS r_name FROM provinces p JOIN regions r ON p.id_region = r.id WHERE p.id = ?";
         Provincia province = null;
 
         try (Connection connection = DatabaseConnectionManager.getConnection();

@@ -23,8 +23,9 @@ INSERT IGNORE INTO regions (code, name) VALUES
 ('16', 'PAÍS VASCO'),
 ('17', 'LA RIOJA'),
 ('18', 'CEUTA Y MELILLA');
-/*
--- Crear tabla para las provincias españolas
+/*Realizado por Alejandro Madrigal*/
+
+-- Crear tabla para las provincias
 CREATE TABLE IF NOT EXISTS provinces (
     id INT AUTO_INCREMENT PRIMARY KEY,
     code VARCHAR(10) NOT NULL UNIQUE,
@@ -32,7 +33,7 @@ CREATE TABLE IF NOT EXISTS provinces (
     id_region INT NOT NULL, FOREIGN KEY (id_region) REFERENCES regions(id)
 );
 
--- Insertar datos de las provincias españolas con los códigos correctos
+-- Insertar datos de las provincias con los códigos correctos
 INSERT IGNORE INTO provinces (code, name, id_region) VALUES
 ('01', 'Araba/Álava', 16),
 ('02', 'Albacete', 8),
@@ -85,4 +86,4 @@ INSERT IGNORE INTO provinces (code, name, id_region) VALUES
 ('49', 'Zamora', 7),
 ('50', 'Zaragoza', 2),
 ('51', 'Ceuta', 18),
-('52', 'Melilla', 18);/*
+('52', 'Melilla', 18);
