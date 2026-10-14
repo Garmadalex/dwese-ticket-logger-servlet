@@ -45,5 +45,5 @@
 </form>
 
 <a href="provinces"><fmt:message key="msg.province-form.returnback" /></a>
-<p>Alumno: nombrealumno</p>
+<p>Alumno: Alejandro</p>
 <%@ include file="footer.jsp" %>

@@ -23,13 +23,12 @@
                     <form action="provinces" method="post" style="display:inline;">
                         <input type="hidden" name="action" value="delete" />
                         <input type="hidden" name="id" value="${province.id}" />
-                        <input type="submit" value="<fmt:message key='msg.province.delete' />"
-                               onclick="return confirm('<fmt:message key=\'msg.province.confirm\' />')" />
+                        <input type="submit" value="<fmt:message key='msg.province.delete' />" onclick="return confirm('<fmt:message key='msg.province.confirm' /> ')" />
                     </form>
                 </td>
             </tr>
         </c:forEach>
     </tbody>
 </table>
-<p>Alumno: nombrealumno</p>
+<p>Alumno: Alejandro Madrigal</p>
 <%@ include file="footer.jsp" %>
