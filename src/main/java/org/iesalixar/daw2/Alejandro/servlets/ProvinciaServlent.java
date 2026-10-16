@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * Servlet que gestiona las operaciones CRUD para la entidad Province.
+ * Servlet que gestiona las operaciones CRUD para la entidad Provincia.
  */
 @WebServlet("/provinces")
 public class ProvinciaServlent extends HttpServlet {
