@@ -12,15 +12,15 @@ public interface ProvinciaDAO {
 
     List<Provincia> listAllProvinces() throws SQLException;
 
-    void insertProvince(Provincia province) throws SQLException;
+    void insertProvincia(Provincia province) throws SQLException;
 
-    void updateProvince(Provincia province) throws SQLException;
+    void updateProvincia(Provincia province) throws SQLException;
 
-    void deleteProvince(int id) throws SQLException;
+    void deleteProvincia(int id) throws SQLException;
 
-    Provincia getProvinceById(int id) throws SQLException;
+    Provincia getProvinciaById(int id) throws SQLException;
 
-    boolean existsProvinceByCode(String code) throws SQLException;
+    boolean existsProvinciaByCode(String code) throws SQLException;
 
-    boolean existsProvinceByCodeAndNotId(String code, int id) throws SQLException;
+    boolean existsProvinciaByCodeAndNotId(String code, int id) throws SQLException;
 }

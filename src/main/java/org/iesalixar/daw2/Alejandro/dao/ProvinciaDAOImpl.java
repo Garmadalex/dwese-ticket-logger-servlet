@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
- // Implementación de la interfaz ProvinceDAO para gestionar las operaciones SQL de provincias.
+ // Implementación de la interfaz ProvinciaDAO para gestionar las operaciones SQL de provincias.
 
 public class ProvinciaDAOImpl implements ProvinciaDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(ProvinciaDAOImpl.class);
-
+// Alejandro Madrigal
     @Override
     public List<Provincia> listAllProvinces() throws SQLException {
         logger.info("Entrando en el método listAllProvinces");
@@ -52,7 +52,7 @@ public class ProvinciaDAOImpl implements ProvinciaDAO {
     }
 
     @Override
-    public void insertProvince(Provincia province) throws SQLException {
+    public void insertProvincia(Provincia province) throws SQLException {
         logger.info("Entrando en insertProvince con código: {}", province.getCode());
         String query = "INSERT INTO provinces (code, name, id_region) VALUES (?, ?, ?)";
 
@@ -70,7 +70,7 @@ public class ProvinciaDAOImpl implements ProvinciaDAO {
     }
 
     @Override
-    public void updateProvince(Provincia province) throws SQLException {
+    public void updateProvincia(Provincia province) throws SQLException {
         logger.info("Entrando en updateProvince con ID: {}", province.getId());
         String query = "UPDATE provinces SET code = ?, name = ?, id_region = ? WHERE id = ?";
 
@@ -89,7 +89,7 @@ public class ProvinciaDAOImpl implements ProvinciaDAO {
     }
 
     @Override
-    public void deleteProvince(int id) throws SQLException {
+    public void deleteProvincia(int id) throws SQLException {
         logger.info("Entrando en deleteProvince con ID: {}", id);
         String query = "DELETE FROM provinces WHERE id = ?";
 
@@ -105,7 +105,7 @@ public class ProvinciaDAOImpl implements ProvinciaDAO {
     }
 
     @Override
-    public Provincia getProvinceById(int id) throws SQLException {
+    public Provincia getProvinciaById(int id) throws SQLException {
         logger.info("Entrando en getProvinceById con ID: {}", id);
         String query = "SELECT p.id, p.code, p.name, p.id_region, r.code AS r_code, r.name AS r_name FROM provinces p JOIN regions r ON p.id_region = r.id WHERE p.id = ?";
         Provincia province = null;
@@ -138,7 +138,7 @@ public class ProvinciaDAOImpl implements ProvinciaDAO {
     }
 
     @Override
-    public boolean existsProvinceByCode(String code) throws SQLException {
+    public boolean existsProvinciaByCode(String code) throws SQLException {
         logger.info("Verificando existencia de provincia por código: {}", code);
         String sql = "SELECT COUNT(*) FROM provinces WHERE UPPER(code) = ?";
         try (Connection connection = DatabaseConnectionManager.getConnection();
@@ -152,7 +152,7 @@ public class ProvinciaDAOImpl implements ProvinciaDAO {
     }
 
     @Override
-    public boolean existsProvinceByCodeAndNotId(String code, int id) throws SQLException {
+    public boolean existsProvinciaByCodeAndNotId(String code, int id) throws SQLException {
         logger.info("Verificando existencia de provincia por código {} excluyendo ID {}", code, id);
         String sql = "SELECT COUNT(*) FROM provinces WHERE UPPER(code) = ? AND id != ?";
         try (Connection connection = DatabaseConnectionManager.getConnection();

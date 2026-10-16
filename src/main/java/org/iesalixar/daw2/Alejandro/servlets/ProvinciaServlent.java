@@ -120,7 +120,7 @@ public class ProvinciaServlent extends HttpServlet {
             throws SQLException, ServletException, IOException {
         logger.info("Mostrando formulario de edición para provincia");
         int id = Integer.parseInt(request.getParameter("id"));
-        Provincia existingProvince = provinceDAO.getProvinceById(id);
+        Provincia existingProvince = provinceDAO.getProvinciaById(id);
         List<Region> listRegions = regionDAO.listAllRegions();
         request.setAttribute("province", existingProvince);
         request.setAttribute("listRegions", listRegions);
@@ -143,7 +143,7 @@ public class ProvinciaServlent extends HttpServlet {
 
         int idRegion = Integer.parseInt(idRegionStr);
 
-        if (provinceDAO.existsProvinceByCode(code)) {
+        if (provinceDAO.existsProvinciaByCode(code)) {
             request.setAttribute("errorMessage", "El código de la provincia ya existe.");
             request.setAttribute("listRegions", regionDAO.listAllRegions());
             request.getRequestDispatcher("province-form.jsp").forward(request, response);
@@ -152,7 +152,7 @@ public class ProvinciaServlent extends HttpServlet {
 
         Provincia newProvince = new Provincia(code, name, idRegion);
         try {
-            provinceDAO.insertProvince(newProvince);
+            provinceDAO.insertProvincia(newProvince);
         } catch (SQLException e) {
             if ("23505".equals(e.getSQLState())) {
                 request.setAttribute("errorMessage", "El código de la provincia debe ser único.");
@@ -175,7 +175,7 @@ public class ProvinciaServlent extends HttpServlet {
 
         if (code.isEmpty() || name.isEmpty() || idRegionStr == null || idRegionStr.isEmpty()) {
             request.setAttribute("errorMessage", "Todos los campos son obligatorios.");
-            request.setAttribute("province", provinceDAO.getProvinceById(id));
+            request.setAttribute("province", provinceDAO.getProvinciaById(id));
             request.setAttribute("listRegions", regionDAO.listAllRegions());
             request.getRequestDispatcher("province-form.jsp").forward(request, response);
             return;
@@ -183,9 +183,9 @@ public class ProvinciaServlent extends HttpServlet {
 
         int idRegion = Integer.parseInt(idRegionStr);
 
-        if (provinceDAO.existsProvinceByCodeAndNotId(code, id)) {
+        if (provinceDAO.existsProvinciaByCodeAndNotId(code, id)) {
             request.setAttribute("errorMessage", "El código de la provincia ya existe para otra provincia.");
-            request.setAttribute("province", provinceDAO.getProvinceById(id));
+            request.setAttribute("province", provinceDAO.getProvinciaById(id));
             request.setAttribute("listRegions", regionDAO.listAllRegions());
             request.getRequestDispatcher("province-form.jsp").forward(request, response);
             return;
@@ -193,11 +193,11 @@ public class ProvinciaServlent extends HttpServlet {
 
         Provincia updatedProvince = new Provincia(id, code, name, idRegion, null);
         try {
-            provinceDAO.updateProvince(updatedProvince);
+            provinceDAO.updateProvincia(updatedProvince);
         } catch (SQLException e) {
             if ("23505".equals(e.getSQLState())) {
                 request.setAttribute("errorMessage", "El código de la provincia debe ser único.");
-                request.setAttribute("province", provinceDAO.getProvinceById(id));
+                request.setAttribute("province", provinceDAO.getProvinciaById(id));
                 request.setAttribute("listRegions", regionDAO.listAllRegions());
                 request.getRequestDispatcher("province-form.jsp").forward(request, response);
                 return;
@@ -211,7 +211,7 @@ public class ProvinciaServlent extends HttpServlet {
             throws SQLException, IOException {
         logger.info("Eliminando provincia con ID: {}", request.getParameter("id"));
         int id = Integer.parseInt(request.getParameter("id"));
-        provinceDAO.deleteProvince(id);
+        provinceDAO.deleteProvincia(id);
         response.sendRedirect("provinces");
     }
 }
