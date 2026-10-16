@@ -2,13 +2,13 @@ package org.iesalixar.daw2.Alejandro.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor; //Importamos las librerías lombok para que nos rellene todo automaticamente
 
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Provincia {
+public class Provincia { //Creamos la clase provincia con todas las variables necesarias para el funcionamiento de nuestra aplicacion
 
     private int id;
 

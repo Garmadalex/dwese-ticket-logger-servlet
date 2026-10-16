@@ -18,9 +18,9 @@ import java.util.List;
 
  //Servlet que gestiona las operaciones CRUD para la entidad Provincia.
 
-@WebServlet("/provinces")
+@WebServlet("/provinces") // Creamos la nueva extensión que tendrá nuestra aplicación de provincias
 public class ProvinciaServlent extends HttpServlet {
-
+    // DAO para gestionar las operaciones de las povincias en la base de datos
     private static final Logger logger = LoggerFactory.getLogger(ProvinciaServlent.class);
     private ProvinciaDAO provinceDAO;
     private RegionDAO regionDAO;
@@ -51,13 +51,13 @@ public class ProvinciaServlent extends HttpServlet {
             }
             switch (action) {
                 case "new":
-                    showNewForm(request, response);
+                    showNewForm(request, response); // Mostrar formulario para una nueva provincia
                     break;
                 case "edit":
-                    showEditForm(request, response);
+                    showEditForm(request, response); //mostrar formulario para editar una provincia
                     break;
                 default:
-                    listProvinces(request, response);
+                    listProvinces(request, response); //Listar todas las provincias
                     break;
             }
         } catch (SQLException ex) {
@@ -81,16 +81,16 @@ public class ProvinciaServlent extends HttpServlet {
             }
             switch (action) {
                 case "insert":
-                    insertProvince(request, response);
+                    insertProvince(request, response); // Con esto logramos insertamos una nueva provincia
                     break;
                 case "update":
-                    updateProvince(request, response);
+                    updateProvince(request, response); // Con esto actualizamos una provincia
                     break;
                 case "delete":
-                    deleteProvince(request, response);
+                    deleteProvince(request, response); // Con esto eliminamos una provincia
                     break;
                 default:
-                    listProvinces(request, response);
+                    listProvinces(request, response); //Mostramos todas las provincias
                     break;
             }
         } catch (SQLException ex) {
@@ -103,16 +103,16 @@ public class ProvinciaServlent extends HttpServlet {
     private void listProvinces(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         logger.info("Listando todas las provincias");
-        List<Provincia> listProvinces = provinceDAO.listAllProvinces();
-        request.setAttribute("listProvinces", listProvinces);
-        request.getRequestDispatcher("province.jsp").forward(request, response);
+        List<Provincia> listProvinces = provinceDAO.listAllProvinces(); // Obtenemos todas las provincias desde el DAO de provincias
+        request.setAttribute("listProvinces", listProvinces); // Listamos todas las provincias en la vista
+        request.getRequestDispatcher("province.jsp").forward(request, response); // redirigimos al archivo jsp en cuestión
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
         logger.info("Mostrando formulario para nueva provincia");
-        List<Region> listRegions = regionDAO.listAllRegions();
-        request.setAttribute("listRegions", listRegions);
+        List<Region> listRegions = regionDAO.listAllRegions(); //Obtenemos todas las regiones desde el dao de regiones
+        request.setAttribute("listRegions", listRegions); // Listamos todas las regiones a la vista
         request.getRequestDispatcher("province-form.jsp").forward(request, response);
     }
 
@@ -120,9 +120,9 @@ public class ProvinciaServlent extends HttpServlet {
             throws SQLException, ServletException, IOException {
         logger.info("Mostrando formulario de edición para provincia");
         int id = Integer.parseInt(request.getParameter("id"));
-        Provincia existingProvince = provinceDAO.getProvinciaById(id);
+        Provincia existingProvince = provinceDAO.getProvinciaById(id); //Obtenemos la provincia por su id dessde el DAO
         List<Region> listRegions = regionDAO.listAllRegions();
-        request.setAttribute("province", existingProvince);
+        request.setAttribute("province", existingProvince); // Pasamos la provincia a la vista
         request.setAttribute("listRegions", listRegions);
         request.getRequestDispatcher("province-form.jsp").forward(request, response);
     }
@@ -130,7 +130,7 @@ public class ProvinciaServlent extends HttpServlet {
     private void insertProvince(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         logger.info("Insertando nueva provincia");
-        String code = request.getParameter("code") != null ? request.getParameter("code").trim().toUpperCase() : "";
+        String code = request.getParameter("code") != null ? request.getParameter("code").trim().toUpperCase() : ""; //Convertimos a mayúsculas igual que en RegionServlent
         String name = request.getParameter("name") != null ? request.getParameter("name").trim() : "";
         String idRegionStr = request.getParameter("id_region");
 
@@ -143,6 +143,7 @@ public class ProvinciaServlent extends HttpServlet {
 
         int idRegion = Integer.parseInt(idRegionStr);
 
+        //Aqui comprobamos que si el codifo de la provincia ya existe
         if (provinceDAO.existsProvinciaByCode(code)) {
             request.setAttribute("errorMessage", "El código de la provincia ya existe.");
             request.setAttribute("listRegions", regionDAO.listAllRegions());

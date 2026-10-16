@@ -114,8 +114,7 @@ public class RegionServlet extends HttpServlet {
      * @throws IOException en caso de error de E/S.
      */
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("region-form.jsp").forward(request,
-                response); // Redirige a la vista para nueva región
+        request.getRequestDispatcher("region-form.jsp").forward(request, response); // Redirige a la vista para nueva región
     }
     /**
      * Muestra el formulario para editar una región existente.

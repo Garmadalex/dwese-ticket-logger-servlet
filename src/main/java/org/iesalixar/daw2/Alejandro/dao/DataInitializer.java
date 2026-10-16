@@ -13,7 +13,7 @@ import org.iesalixar.daw2.Alejandro.dao.DatabaseConnectionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 public class DataInitializer {
-    private static final Logger logger = LoggerFactory.getLogger(DataInitializer.class);
+    private static final Logger logger = LoggerFactory.getLogger(DataInitializer.class); //Creamos un objeto Logger con el que iremos visualizando por consola todo lo vayasmos ejecutando de la aplicacion
     public static void loadDataFromSQL(InputStream sqlFileStream) throws SQLException, IOException {
         logger.info("Entrando en el método loadDataFromSQL");
         if (sqlFileStream == null) {
@@ -30,21 +30,21 @@ public class DataInitializer {
                 logger.error("Error al leer el archivo SQL: {}", e.getMessage(), e);
                 throw new IOException("Error al leer el archivo SQL", e);
             }
-            String[] statements = sql.split(";"); // Dividir las sentencias por';'
-            // Manejar transacciones
+            String[] statements = sql.split(";"); // Con esto lo que haremos es divir cada sentencia sql cada punto y coma = ;
+            // Manejaremo transacciones
             connection.setAutoCommit(false);
             try (Statement statement = connection.createStatement()) {
-                // Ejecutar cada instrucción SQL por separado
+                // Con el siguiente for le pasaremos la variable statements para manejar cada sentencia por separado
                 for (String sqlStatement : statements) {
                     if (!sqlStatement.trim().isEmpty()) {
                         logger.info("Ejecutando la sentencia SQL: {}", sqlStatement);
                         statement.execute(sqlStatement.trim());
                     }
                 }
-                connection.commit(); // Confirmar los cambios
+                connection.commit(); // Una vez se haya ejecutado la sentencia guardamos los cambios si los hay
                 logger.info("Datos cargados exitosamente desde el archivo SQL");
             } catch (SQLException e) {
-                connection.rollback(); // Revertir los cambios si algo falla
+                connection.rollback(); // Si algo falla revertimos la sentencia para evitar cargarnos los datos
                 logger.error("Error al ejecutar el archivo SQL, se ha revertido la transacción: {}", e.getMessage(), e);
                 throw new SQLException("Error al ejecutar el archivo SQL, transacción revertida", e);
             }
